@@ -31,4 +31,3 @@ class AD_Game(object):
 		info, rounds = board_parser.get_by_address(self.ip)
 		self.teams = [team_info['name'] for team_info in info]
 		self.rounds = rounds
-		print('ok. refreshed')
