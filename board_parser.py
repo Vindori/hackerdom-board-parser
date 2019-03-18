@@ -37,8 +37,8 @@ def get_teams_info(soup):
 	[
 		{
 			'name': team.find('div', 'team_name').text.strip(),
-			'place': team.find('td', 'place').text.strip(),
-			'score': team.find('td', 'score').text.strip(),
+			'place': int(team.find('td', 'place').text.strip()),
+			'score': float(team.find('td', 'score').text.strip()),
 			'ip': team.find('div', 'team_server').text.strip(),
 			'info': get_services_info(team, services)
 		}
