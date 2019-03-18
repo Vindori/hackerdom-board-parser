@@ -37,6 +37,3 @@ class AD_Game(object):
 		self.rounds = rounds
 		print('ok. refreshed')
 
-
-current = AD_Game('scoreboard.spb.ctf.su')
-print(current.teams)
