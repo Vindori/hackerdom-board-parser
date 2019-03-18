@@ -60,6 +60,3 @@ def get_by_address(address):
 
 	all_info = get_teams_info(soup)
 	return (all_info, get_current_round(soup))
-
-
-print(json.dumps(get_by_address('scoreboard.spb.ctf.su')[0], indent=4))
