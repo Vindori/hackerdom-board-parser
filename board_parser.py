@@ -27,7 +27,6 @@ def get_services_info(soup, services):
 		}
 		for service_info in zip(services_status, services_sla, services_fp, services_flags)
 	]
-	
 	return { services[number % len(services)]: info for number, info in enumerate(services_info) }
 
 
@@ -41,7 +40,7 @@ def get_teams_info(soup):
 			'place': team.find('td', 'place').text.strip(),
 			'score': team.find('td', 'score').text.strip(),
 			'ip': team.find('div', 'team_server').text.strip(),
-			'info': get_services_info(soup, services)
+			'info': get_services_info(team, services)
 		}
 		for team in teams_html
 	]
