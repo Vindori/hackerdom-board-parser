@@ -9,10 +9,6 @@ class AD_Game(object):
 		global info, rounds
 		info, rounds = board_parser.get_by_address(self.ip)
 		self.rounds = rounds
-		self.teams = [team_info['name'] for team_info in info]		
-
-	def refresh(self):
-		info, rounds = board_parser.get_by_address(self.ip)
 		self.teams = [team_info['name'] for team_info in info]
 
 	def info_by_name(self, name):
