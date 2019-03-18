@@ -1,5 +1,5 @@
 from time import sleep
-import parser
+import board_parser
 
 class AD_Game(object):
 	"""This class is combined with 
@@ -7,12 +7,12 @@ class AD_Game(object):
 	def __init__(self, ip):
 		self.ip = ip
 		global info, rounds
-		info, rounds = parser.get_by_address(self.ip)
+		info, rounds = board_parser.get_by_address(self.ip)
 		self.rounds = rounds
 		self.teams = [team_info['name'] for team_info in info]		
 
 	def refresh(self):
-		info, rounds = parser.get_by_address(self.ip)
+		info, rounds = board_parser.get_by_address(self.ip)
 		self.teams = [team_info['name'] for team_info in info]
 
 	def info_by_name(self, name):
@@ -28,8 +28,7 @@ class AD_Game(object):
 		return None
 
 	def refresh(self):
-		info, rounds = parser.get_by_address(self.ip)
+		info, rounds = board_parser.get_by_address(self.ip)
 		self.teams = [team_info['name'] for team_info in info]
 		self.rounds = rounds
 		print('ok. refreshed')
-
