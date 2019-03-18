@@ -1,10 +1,6 @@
 from time import sleep
 import parser
 
-def ref(obj):
-	obj.refresh()
-
-
 class AD_Game(object):
 	"""This class is combined with 
 	pasrser of HackerDom's A&D scoreboard."""
