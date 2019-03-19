@@ -6,6 +6,12 @@ from bs4 import BeautifulSoup
 def prettify(text):
 	return text.strip().replace('\n', '').replace(' ', '')
 
+def remove_trash(text):
+	trash = re.findall('\([+|-][0-9]+\)', text)
+	for t in trash:
+		text = text.replace(t, '')
+	return text
+
 def get_services(soup):
 	return [ service.text for service in soup.findAll('th', 'service_name') ]
 
@@ -16,7 +22,7 @@ def get_services_info(soup, services):
 	services_fp = [ prettify(fp.find('div', 'param_value').text) for fp in soup.findAll('div', 'fp') ]
 	services_flags = [ prettify(flags.find('div', 'param_value').text).split('/') for flags in soup.findAll('div', 'flags') ]
 	services_flags = [ [ int(i) for i in flags ] if len(flags) == 2 else [int(flags[0]), 0] for flags in services_flags ]
-	services_flags = [ { 'got': flags[0], 'lost': flags[1]} for flags in services_flags ]
+	services_flags = [ { 'got': flags[0], 'lost': flags[1] } for flags in services_flags ]
 	services_info = \
 	[
 		{
@@ -37,7 +43,7 @@ def get_teams_info(soup):
 	[
 		{
 			'name': team.find('div', 'team_name').text.strip(),
-			'place': int(team.find('td', 'place').text.strip()),
+			'place': int(remove_trash(team.find('td', 'place').text.strip())),
 			'score': float(team.find('td', 'score').text.strip()),
 			'ip': team.find('div', 'team_server').text.strip(),
 			'info': get_services_info(team, services)
