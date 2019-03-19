@@ -3,7 +3,7 @@ import board_parser
 
 class AD_Game(object):
 	"""This class is combined with 
-	pasrser of HackerDom's A&D scoreboard."""
+	   pasrser of HackerDom's A&D scoreboard."""
 	def __init__(self, ip):
 		global soup, info, delta
 		delta = []
@@ -39,10 +39,11 @@ class AD_Game(object):
 
 
 	def refresh(self): # returns True if refreshed
+		global info
+
 		new_soup = board_parser.get_soup_by_address(self.ip)
 		new_info = board_parser.get_teams_info(new_soup)
 		current_round = board_parser.get_current_round(new_soup)
-
 		if self.round != current_round:
 			self.__recalculate_delta(new_info)
 			info = new_info.copy()
@@ -66,6 +67,7 @@ class AD_Game(object):
 										  - team_old['info'][service]['flags']['lost']
 
 					delta_services[service] = {
+												'status': team_new['info'][service]['status'],
 												'flags': {
 															 'got': team_got_new_flags, # can't be negative
 															 'lost': team_lost_new_flags # can't be negative
