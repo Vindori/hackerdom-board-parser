@@ -21,7 +21,7 @@ def get_services_info(soup, services):
 	services_sla = [ prettify(sla.find('div', 'param_value').text) for sla in soup.findAll('div', 'sla') ]
 	services_fp = [ prettify(fp.find('div', 'param_value').text) for fp in soup.findAll('div', 'fp') ]
 	services_flags = [ prettify(flags.find('div', 'param_value').text).split('/') for flags in soup.findAll('div', 'flags') ]
-	services_flags = [ [ int(i) for i in flags ] if len(flags) == 2 else [int(flags[0]), 0] for flags in services_flags ]
+	services_flags = [ [ abs(int(i)) for i in flags ] if len(flags) == 2 else [int(flags[0]), 0] for flags in services_flags ]
 	services_flags = [ { 'got': flags[0], 'lost': flags[1] } for flags in services_flags ]
 	services_info = \
 	[
@@ -56,12 +56,9 @@ def get_current_round(soup):
 	current_round = re.findall('[0-9]+', soup.find('div', attrs={'id': 'round'}).text.strip())[0]
 	return int(current_round)
 
-def get_by_address(address):
+def get_soup_by_address(address):
 	if not address.startswith('http'):
 		address = 'http://' + address
 	html = requests.get(address)
 
-	soup = BeautifulSoup(html.text, 'html.parser')
-
-	all_info = get_teams_info(soup)
-	return (all_info, get_current_round(soup))
+	return BeautifulSoup(html.text, 'html.parser')
