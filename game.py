@@ -52,10 +52,11 @@ class AD_Game(object):
 			return False
 
 	def __recalculate_delta(self, new_info):
+		global delta
 		delta = []
 		for team_new in new_info:
 			try:
-				team_old = self.info_by_ip(team_new['ip'])
+				team_old = self.get_info_by_ip(team_new['ip'])
 				services = board_parser.get_services(soup)
 				delta_services = {}
 				for service in services:
@@ -74,11 +75,12 @@ class AD_Game(object):
 				delta.append(
 								{
 									'name': team_new['name'], # it's not delta, actually
+									'ip': team_new['ip'], # and this, as well
 									'place': team_old['place'] - team_new['place'], # if positive then up, if negative then down
 									'score': round(team_new['score'] - team_old['score'], 2), # if positive then more score
 									'info': delta_services
 								}
 							)
-			except KeyError:
+			except KeyError as e:
 				continue
 
