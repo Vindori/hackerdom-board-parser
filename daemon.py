@@ -25,7 +25,7 @@ def generate_message(data):
 		message += f'You have lost {abs(delta_score)}.\n'
 
 	message += 'Services report:\n'
-	services_report = [f'{service}: +{info["flags"]["got"]} / -{info["flags"]["got"]}, status {info["status"].replace("status_", "")}' for service, info in services_info.items()]
+	services_report = [f'{service}: +{info["flags"]["got"]} / -{info["flags"]["lost"]}, status {info["status"].replace("status_", "")}' for service, info in services_info.items()]
 	message += '\n'.join(services_report)
 	message += '\n\n'
 	return message
