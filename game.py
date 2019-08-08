@@ -14,7 +14,7 @@ class AD_Game(object):
 
 	def get_info_by_name(self, name):
 		for team in info:
-			if team['name'] == name:
+			if team['name'].lower() == name.lower():
 				return team
 		raise KeyError(f"There is no {name} team")
 
