@@ -11,6 +11,6 @@
 ad = game.AD_Game(scoreboard_ip)
 current_round = ad.round
 team_info = ad.get_info_by_ip(team_ip)
-team_info = ad.get_info_by_name(team_name) # Case sensetive
+team_info = ad.get_info_by_name(team_name) # Case insensetive
 ad.refresh() # You have to manually refresh game state, it returns True if round has been changed
 ```

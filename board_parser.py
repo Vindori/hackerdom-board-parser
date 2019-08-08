@@ -37,7 +37,7 @@ def get_services_info(soup, services):
 
 def get_teams_info(soup):
 	services = get_services(soup)
-	teams_html = soup.findAll('tr', attrs={'class': 'team', 'style': 'display: none'})
+	teams_html = soup.findAll('tr', attrs={'class': 'team'})[1:]
 	teams = \
 	[
 		{
