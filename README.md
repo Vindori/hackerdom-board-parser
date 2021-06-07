@@ -1,4 +1,4 @@
-# hackerdom-board-parser
+# hackerdom-board-parser (OUTDATED)
 * This parser was created to make it easier to find out that your service is down or you are losing flags.
 ## Usage:
 1. You can simply start daemon.py with scoreboard and team ip and get up to date statistics:
